@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Worker dashboard · WorkSure</title>
+  <meta name="description" content="Accept booking requests, manage jobs, prices, working hours and earnings.">
+  <link rel="icon" href="assets/icons/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body data-protected>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div id="site-header"></div>
+
+  <main id="main" class="container section">
+    <div class="dash-head">
+      <div>
+        <h1>Worker dashboard</h1>
+        <p>Answer booking requests, run your jobs, and keep your profile up to date.</p>
+      </div>
+      <a class="btn btn-outline" href="profile.html">Account settings</a>
+    </div>
+
+    <div id="worker-main">
+      <div class="tabs" role="tablist" id="worker-tabs" aria-label="Worker sections">
+        <button type="button" role="tab" class="tab" id="tab-requests" data-tab="requests" aria-controls="panel-requests" aria-selected="true">
+          New requests <span id="count-requests" class="badge badge-pending">0</span></button>
+        <button type="button" role="tab" class="tab" id="tab-jobs" data-tab="jobs" aria-controls="panel-jobs" aria-selected="false">Active jobs</button>
+        <button type="button" role="tab" class="tab" id="tab-history" data-tab="history" aria-controls="panel-history" aria-selected="false">History</button>
+        <button type="button" role="tab" class="tab" id="tab-earnings" data-tab="earnings" aria-controls="panel-earnings" aria-selected="false">Earnings</button>
+        <button type="button" role="tab" class="tab" id="tab-profile" data-tab="profile" aria-controls="panel-profile" aria-selected="false">Professional profile</button>
+        <button type="button" role="tab" class="tab" id="tab-services" data-tab="services" aria-controls="panel-services" aria-selected="false">Services and prices</button>
+        <button type="button" role="tab" class="tab" id="tab-availability" data-tab="availability" aria-controls="panel-availability" aria-selected="false">Working hours</button>
+        <button type="button" role="tab" class="tab" id="tab-reviews" data-tab="reviews" aria-controls="panel-reviews" aria-selected="false">Reviews</button>
+      </div>
+
+      <!-- Booking requests -->
+      <section id="panel-requests" role="tabpanel" aria-labelledby="tab-requests">
+        <div id="list-requests" class="booking-list" aria-live="polite"></div>
+      </section>
+
+      <!-- Active jobs -->
+      <section id="panel-jobs" role="tabpanel" aria-labelledby="tab-jobs" hidden>
+        <div id="list-jobs" class="booking-list" aria-live="polite"></div>
+      </section>
+
+      <!-- Past jobs -->
+      <section id="panel-history" role="tabpanel" aria-labelledby="tab-history" hidden>
+        <div id="list-history" class="booking-list" aria-live="polite"></div>
+      </section>
+
+      <!-- Earnings -->
+      <section id="panel-earnings" role="tabpanel" aria-labelledby="tab-earnings" hidden>
+        <div class="stat-grid">
+          <div class="card stat-card">
+            <div class="stat-value" id="earn-total">–</div>
+            <div class="stat-label">Total earned</div>
+            <p class="small muted" id="earn-total-jobs"></p>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-value" id="earn-month">–</div>
+            <div class="stat-label">Earned this month</div>
+            <p class="small muted" id="earn-month-jobs"></p>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-value" id="earn-upcoming">–</div>
+            <div class="stat-label">Booked, not yet done</div>
+            <p class="small muted" id="earn-upcoming-jobs"></p>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-value" id="earn-pending">–</div>
+            <div class="stat-label">Waiting for your reply</div>
+          </div>
+        </div>
+        <p class="hint mt-4" id="earn-note"></p>
+        <div class="table-wrap mt-4">
+          <table class="table">
+            <caption class="sr-only">Recent completed jobs</caption>
+            <thead><tr><th scope="col">Date</th><th scope="col">Service</th><th scope="col">Amount</th></tr></thead>
+            <tbody id="earn-recent"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Professional profile -->
+      <section id="panel-profile" role="tabpanel" aria-labelledby="tab-profile" hidden>
+        <div class="two-col">
+          <div class="card">
+            <h2>Professional profile</h2>
+            <p id="verify-note" class="verify-note is-pending"></p>
+            <div id="profile-alert"></div>
+            <form id="worker-profile-form" novalidate>
+              <div class="form-group">
+                <label for="headline">Headline</label>
+                <input class="input" id="headline" name="headline" placeholder="e.g. Certified electrician for homes and offices">
+                <p class="field-error" data-error="headline"></p>
+              </div>
+              <div class="form-group">
+                <label for="bio">About you</label>
+                <textarea class="textarea" id="bio" name="bio" rows="4" placeholder="Your experience, how you work and what customers can expect."></textarea>
+                <p class="field-error" data-error="bio"></p>
+              </div>
+              <div class="form-group">
+                <label for="skills">Skills</label>
+                <input class="input" id="skills" name="skills" placeholder="e.g. wiring, fan installation, MCB repair">
+                <p class="field-error" data-error="skills"></p>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="experienceYears">Years of experience</label>
+                  <input class="input" id="experienceYears" name="experienceYears" type="number" min="0" max="60" step="1">
+                  <p class="field-error" data-error="experienceYears"></p>
+                </div>
+                <div class="form-group">
+                  <label for="location">City or area</label>
+                  <input class="input" id="location" name="location" placeholder="e.g. Pune">
+                  <p class="field-error" data-error="location"></p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="serviceArea">Areas you cover</label>
+                <input class="input" id="serviceArea" name="serviceArea" placeholder="e.g. Kothrud, Baner, Aundh">
+                <p class="field-error" data-error="serviceArea"></p>
+              </div>
+              <div class="checkbox-row form-group">
+                <input type="checkbox" id="isAvailable" name="isAvailable">
+                <label for="isAvailable">I am taking new booking requests</label>
+              </div>
+              <button type="submit" class="btn btn-primary">Save profile</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <h2>Profile photo</h2>
+            <div class="photo-row">
+              <img id="photo-preview" class="avatar avatar-lg" alt="Your profile photo" width="96" height="96" hidden>
+              <div id="photo-fallback" class="avatar avatar-lg avatar-fallback" aria-hidden="true"><i class="fa-solid fa-user"></i></div>
+            </div>
+            <form id="photo-form" class="mt-4" novalidate>
+              <div class="form-group">
+                <label for="photo">Choose a photo (JPG, PNG or WEBP, up to 2 MB)</label>
+                <input class="input" id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp">
+              </div>
+              <div id="photo-alert"></div>
+              <button type="submit" class="btn btn-outline">Upload photo</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services and prices -->
+      <section id="panel-services" role="tabpanel" aria-labelledby="tab-services" hidden>
+        <div id="services-alert"></div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Service</th>
+                <th scope="col">Base price</th>
+                <th scope="col">Your price</th>
+                <th scope="col">Accepting</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="services-body"></tbody>
+          </table>
+        </div>
+        <div class="card mt-5">
+          <h2>Add a service</h2>
+          <form id="add-service-form" class="inline-form" novalidate>
+            <div class="form-group">
+              <label for="add-service-select">Service</label>
+              <select class="select" id="add-service-select" name="serviceId"></select>
+              <p class="field-error" data-error="serviceId"></p>
+            </div>
+            <div class="form-group">
+              <label for="add-service-price">Your price (₹)</label>
+              <input class="input" id="add-service-price" name="price" type="number" min="1" step="0.01">
+              <p class="field-error" data-error="price"></p>
+            </div>
+            <button type="submit" class="btn btn-primary">Add service</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Working hours -->
+      <section id="panel-availability" role="tabpanel" aria-labelledby="tab-availability" hidden>
+        <div class="card">
+          <h2>Weekly working hours</h2>
+          <p class="muted small">Customers can only book inside these hours. Untick a day if you do not work on it.</p>
+          <div id="availability-alert"></div>
+          <form id="availability-form" novalidate>
+            <div id="availability-rows" class="availability-list"></div>
+            <button type="submit" class="btn btn-primary mt-4">Save working hours</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Reviews -->
+      <section id="panel-reviews" role="tabpanel" aria-labelledby="tab-reviews" hidden>
+        <p class="section-lead" id="worker-avg"></p>
+        <p id="worker-reviews-status" class="muted"></p>
+        <div id="worker-reviews-list" class="grid-cards-compact"></div>
+      </section>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/worker-dashboard.js"></script>
+</body>
+</html>

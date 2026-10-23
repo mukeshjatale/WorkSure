@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WorkSure · Book trusted home professionals</title>
+  <meta name="description" content="Find and book verified plumbers, electricians, cleaners, carpenters, painters and AC technicians near you.">
+  <link rel="icon" href="assets/icons/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <a class="skip-link" href="#home-page">Skip to main content</a>
+  <div id="site-header"></div>
+
+  <main id="home-page">
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Verified professionals</span>
+        <h1>Book a trusted professional for any job at home</h1>
+        <p>Plumbing, electrical work, cleaning, carpentry, painting, AC and appliance repair. Compare verified professionals, see their prices, and book a time that suits you.</p>
+
+        <form id="hero-search" class="search-card" role="search" aria-label="Search professionals">
+          <div class="form-group">
+            <label for="hero-q">What do you need?</label>
+            <input class="input" id="hero-q" name="q" type="search" placeholder="e.g. leaking tap, AC service">
+          </div>
+          <div class="form-group">
+            <label for="search-category">Service</label>
+            <select class="select" id="search-category" name="categoryId">
+              <option value="">All services</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="hero-location">Area or city</label>
+            <input class="input" id="hero-location" name="location" placeholder="e.g. Pune, Kothrud">
+          </div>
+          <div class="form-group">
+            <label for="hero-price">Price range</label>
+            <select class="select" id="hero-price" name="priceRange">
+              <option value="">Any price</option>
+              <option value="0-500">Under ₹500</option>
+              <option value="500-1000">₹500 to ₹1,000</option>
+              <option value="1000-2500">₹1,000 to ₹2,500</option>
+              <option value="2500-">₹2,500 and above</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-accent">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Search
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <section id="search-results" class="section container" hidden>
+      <div class="section-head">
+        <h2>Search results</h2>
+        <p id="search-status" class="muted" aria-live="polite"></p>
+        <a id="search-view-all" href="services.html">See all results with more filters</a>
+      </div>
+      <div id="search-grid" class="grid-cards"></div>
+    </section>
+
+    <section class="section container">
+      <div class="section-head">
+        <h2>Popular services</h2>
+        <p>Choose a service to see the professionals who offer it.</p>
+      </div>
+      <div id="category-grid" class="grid-categories"></div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Top-rated professionals</h2>
+          <p>Verified professionals with the best reviews from completed bookings.</p>
+        </div>
+        <div id="featured-grid" class="grid-cards"></div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="section container">
+      <div class="section-head">
+        <h2>How WorkSure works</h2>
+        <p>Four simple steps from search to a finished job.</p>
+      </div>
+      <div class="steps-grid">
+        <article class="card"><div class="step-num">1</div><h3>Search</h3><p class="muted">Pick a service and your area, then compare professionals by price, rating and experience.</p></article>
+        <article class="card"><div class="step-num">2</div><h3>Book a time</h3><p class="muted">Choose a date and start time inside the professional's working hours and describe the job.</p></article>
+        <article class="card"><div class="step-num">3</div><h3>Get confirmation</h3><p class="muted">The professional accepts or declines the request. You can track its status in My bookings.</p></article>
+        <article class="card"><div class="step-num">4</div><h3>Rate the job</h3><p class="muted">After the job is completed, leave a rating and review to help other customers.</p></article>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Why choose WorkSure</h2>
+          <p>Built around trust, clear prices and simple booking.</p>
+        </div>
+        <div class="benefits-grid">
+          <article class="card"><h3><i class="fa-solid fa-user-check" aria-hidden="true"></i> Verified professionals</h3><p class="muted">Every professional is checked by our team before customers can book them.</p></article>
+          <article class="card"><h3><i class="fa-solid fa-indian-rupee-sign" aria-hidden="true"></i> Clear prices</h3><p class="muted">Each professional lists their own price for every service, shown before you book.</p></article>
+          <article class="card"><h3><i class="fa-solid fa-star" aria-hidden="true"></i> Honest reviews</h3><p class="muted">Ratings come only from customers whose bookings were completed.</p></article>
+          <article class="card"><h3><i class="fa-solid fa-list-check" aria-hidden="true"></i> Track everything</h3><p class="muted">See every booking's status and history in one place, from request to completion.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="section-head">
+        <h2>What customers say</h2>
+        <p>Recent reviews from completed bookings.</p>
+      </div>
+      <div id="testimonial-grid" class="grid-cards"></div>
+    </section>
+
+    <section class="stats-band" aria-label="WorkSure in numbers">
+      <div class="container stat-grid">
+        <div class="stat-card"><div class="stat-value" id="stat-workers">0</div><div class="stat-label">Verified professionals</div></div>
+        <div class="stat-card"><div class="stat-value" id="stat-jobs">0</div><div class="stat-label">Completed jobs</div></div>
+        <div class="stat-card"><div class="stat-value" id="stat-categories">0</div><div class="stat-label">Service categories</div></div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container">
+        <h2>Are you a skilled home professional?</h2>
+        <p>Create a worker account, set your services and prices, and start receiving booking requests after verification.</p>
+        <a class="btn btn-primary" href="register.html?role=worker">Join as a professional</a>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

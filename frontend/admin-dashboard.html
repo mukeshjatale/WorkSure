@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin dashboard · WorkSure</title>
+  <meta name="description" content="Manage workers, accounts, services, bookings and reviews.">
+  <link rel="icon" href="assets/icons/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body data-protected>
+  <a class="skip-link" href="#admin-main">Skip to main content</a>
+  <div id="site-header"></div>
+
+  <main id="admin-main" class="container section">
+    <div class="dash-head">
+      <div>
+        <h1>Admin dashboard</h1>
+        <p>Verify professionals, manage accounts, services, bookings and reviews.</p>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist" id="admin-tabs" aria-label="Admin sections">
+      <button type="button" role="tab" class="tab" id="tab-overview" data-tab="overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
+      <button type="button" role="tab" class="tab" id="tab-workers" data-tab="workers" aria-controls="panel-workers" aria-selected="false">Workers</button>
+      <button type="button" role="tab" class="tab" id="tab-users" data-tab="users" aria-controls="panel-users" aria-selected="false">Accounts</button>
+      <button type="button" role="tab" class="tab" id="tab-categories" data-tab="categories" aria-controls="panel-categories" aria-selected="false">Categories</button>
+      <button type="button" role="tab" class="tab" id="tab-services" data-tab="services" aria-controls="panel-services" aria-selected="false">Services</button>
+      <button type="button" role="tab" class="tab" id="tab-bookings" data-tab="bookings" aria-controls="panel-bookings" aria-selected="false">Bookings</button>
+      <button type="button" role="tab" class="tab" id="tab-reviews" data-tab="reviews" aria-controls="panel-reviews" aria-selected="false">Reviews</button>
+      <button type="button" role="tab" class="tab" id="tab-reports" data-tab="reports" aria-controls="panel-reports" aria-selected="false">Reports</button>
+      <button type="button" role="tab" class="tab" id="tab-activity" data-tab="activity" aria-controls="panel-activity" aria-selected="false">Activity log</button>
+    </div>
+
+    <!-- Overview -->
+    <section id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
+      <div id="admin-stats" class="stat-grid"></div>
+      <div class="card mt-5">
+        <h2>Bookings by status</h2>
+        <ul id="booking-status-summary" class="history-list"></ul>
+      </div>
+    </section>
+
+    <!-- Workers -->
+    <section id="panel-workers" role="tabpanel" aria-labelledby="tab-workers" hidden>
+      <div class="filter-bar">
+        <div class="form-group">
+          <label for="worker-status-filter">Show workers</label>
+          <select class="select" id="worker-status-filter">
+            <option value="pending" selected>Waiting for verification</option>
+            <option value="verified">Verified</option>
+            <option value="rejected">Rejected</option>
+            <option value="">All workers</option>
+          </select>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Worker</th><th scope="col">Headline and area</th><th scope="col">Experience</th>
+              <th scope="col">Services</th><th scope="col">Status</th><th scope="col">Reviews</th><th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody id="workers-body"></tbody>
+        </table>
+      </div>
+      <div id="workers-pager" class="pagination"></div>
+    </section>
+
+    <!-- Accounts -->
+    <section id="panel-users" role="tabpanel" aria-labelledby="tab-users" hidden>
+      <form id="user-search-form" class="filter-bar" role="search">
+        <div class="form-group">
+          <label for="user-search">Search by name, email or phone</label>
+          <input class="input" id="user-search" type="search">
+        </div>
+        <div class="form-group">
+          <label for="user-role-filter">Role</label>
+          <select class="select" id="user-role-filter">
+            <option value="">All roles</option>
+            <option value="customer">Customers</option>
+            <option value="worker">Workers</option>
+            <option value="admin">Admins</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="user-search-submit">Search</label>
+          <button type="submit" id="user-search-submit" class="btn btn-outline">Search</button>
+        </div>
+      </form>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr><th scope="col">Name</th><th scope="col">Contact</th><th scope="col">Role</th><th scope="col">Status</th><th scope="col">Joined</th><th scope="col">Action</th></tr>
+          </thead>
+          <tbody id="users-body"></tbody>
+        </table>
+      </div>
+      <div id="users-pager" class="pagination"></div>
+    </section>
+
+    <!-- Categories -->
+    <section id="panel-categories" role="tabpanel" aria-labelledby="tab-categories" hidden>
+      <div class="two-col">
+        <div class="card">
+          <h2 id="category-form-title">Add a category</h2>
+          <div id="category-alert"></div>
+          <form id="category-form" novalidate>
+            <input type="hidden" name="categoryId">
+            <div class="form-group">
+              <label for="cat-name">Name</label>
+              <input class="input" id="cat-name" name="name" required>
+              <p class="field-error" data-error="name"></p>
+            </div>
+            <div class="form-group">
+              <label for="cat-description">Description</label>
+              <input class="input" id="cat-description" name="description">
+              <p class="field-error" data-error="description"></p>
+            </div>
+            <div class="form-group">
+              <label for="cat-icon">Icon class</label>
+              <input class="input" id="cat-icon" name="icon" placeholder="fa-wrench">
+              <p class="hint">A Font Awesome icon name such as fa-wrench or fa-broom. Leave empty for the default.</p>
+              <p class="field-error" data-error="icon"></p>
+            </div>
+            <div class="form-group">
+              <label for="cat-image">Image address (optional)</label>
+              <input class="input" id="cat-image" name="imageUrl" type="url" placeholder="https://...">
+              <p class="field-error" data-error="imageUrl"></p>
+            </div>
+            <div class="btn-group">
+              <button type="submit" class="btn btn-primary">Save category</button>
+              <button type="button" id="category-reset" class="btn btn-outline">Clear form</button>
+            </div>
+          </form>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th scope="col">Name</th><th scope="col">Icon</th><th scope="col">Visibility</th><th scope="col">Address</th><th scope="col">Actions</th></tr></thead>
+            <tbody id="categories-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="panel-services" role="tabpanel" aria-labelledby="tab-services" hidden>
+      <div class="two-col">
+        <div class="card">
+          <h2 id="service-form-title">Add a service</h2>
+          <div id="service-alert"></div>
+          <form id="service-form" novalidate>
+            <input type="hidden" name="serviceId">
+            <div class="form-group">
+              <label for="service-category">Category</label>
+              <select class="select" id="service-category" name="categoryId"></select>
+              <p class="field-error" data-error="categoryId"></p>
+            </div>
+            <div class="form-group">
+              <label for="service-name">Name</label>
+              <input class="input" id="service-name" name="name" required>
+              <p class="field-error" data-error="name"></p>
+            </div>
+            <div class="form-group">
+              <label for="service-description">Description</label>
+              <input class="input" id="service-description" name="description">
+              <p class="field-error" data-error="description"></p>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="service-base">Base price (₹)</label>
+                <input class="input" id="service-base" name="basePrice" type="number" min="1" step="0.01">
+                <p class="field-error" data-error="basePrice"></p>
+              </div>
+              <div class="form-group">
+                <label for="service-duration">Duration (minutes)</label>
+                <input class="input" id="service-duration" name="durationMinutes" type="number" min="15" max="720" step="1" value="120">
+                <p class="field-error" data-error="durationMinutes"></p>
+              </div>
+            </div>
+            <div class="btn-group">
+              <button type="submit" class="btn btn-primary">Save service</button>
+              <button type="button" id="service-reset" class="btn btn-outline">Clear form</button>
+            </div>
+          </form>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th scope="col">Service</th><th scope="col">Category</th><th scope="col">Base price</th><th scope="col">Duration</th><th scope="col">Visibility</th><th scope="col">Actions</th></tr></thead>
+            <tbody id="services-admin-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bookings -->
+    <section id="panel-bookings" role="tabpanel" aria-labelledby="tab-bookings" hidden>
+      <div class="filter-bar">
+        <div class="form-group">
+          <label for="booking-status-filter">Status</label>
+          <select class="select" id="booking-status-filter">
+            <option value="">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="accepted">Accepted</option>
+            <option value="in_progress">In progress</option>
+            <option value="completed">Completed</option>
+            <option value="rejected">Declined</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="table">
+          <thead><tr><th scope="col">ID</th><th scope="col">Date</th><th scope="col">Service</th><th scope="col">Customer</th><th scope="col">Professional</th><th scope="col">Price</th><th scope="col">Status</th></tr></thead>
+          <tbody id="admin-bookings-body"></tbody>
+        </table>
+      </div>
+      <div id="bookings-pager" class="pagination"></div>
+    </section>
+
+    <!-- Reviews -->
+    <section id="panel-reviews" role="tabpanel" aria-labelledby="tab-reviews" hidden>
+      <div class="filter-bar">
+        <div class="form-group">
+          <label for="review-filter">Show reviews</label>
+          <select class="select" id="review-filter">
+            <option value="">All reviews</option>
+            <option value="hidden">Hidden reviews only</option>
+          </select>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="table">
+          <thead><tr><th scope="col">Rating</th><th scope="col">Comment</th><th scope="col">Customer</th><th scope="col">Professional</th><th scope="col">Date</th><th scope="col">Visibility</th><th scope="col">Action</th></tr></thead>
+          <tbody id="admin-reviews-body"></tbody>
+        </table>
+      </div>
+      <div id="reviews-pager" class="pagination"></div>
+    </section>
+
+    <!-- Reports -->
+    <section id="panel-reports" role="tabpanel" aria-labelledby="tab-reports" hidden>
+      <div id="report-alert"></div>
+      <p class="hint" id="report-note"></p>
+      <div class="card">
+        <h2>Last six months</h2>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th scope="col">Month</th><th scope="col">Bookings</th><th scope="col">Completed</th><th scope="col">Completed value</th></tr></thead>
+            <tbody id="report-month-body"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="two-col mt-5">
+        <div class="card">
+          <h2>By category</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th scope="col">Category</th><th scope="col">Bookings</th><th scope="col">Completed value</th></tr></thead>
+              <tbody id="report-category-body"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Top professionals</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th scope="col">Professional</th><th scope="col">Completed jobs</th><th scope="col">Earned</th></tr></thead>
+              <tbody id="report-worker-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Activity log -->
+    <section id="panel-activity" role="tabpanel" aria-labelledby="tab-activity" hidden>
+      <div class="table-wrap">
+        <table class="table">
+          <thead><tr><th scope="col">Date</th><th scope="col">Administrator</th><th scope="col">Action</th><th scope="col">Item</th><th scope="col">Details</th></tr></thead>
+          <tbody id="logs-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/admin-dashboard.js"></script>
+</body>
+</html>

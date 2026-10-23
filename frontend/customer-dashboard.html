@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your dashboard · WorkSure</title>
+  <meta name="description" content="See your upcoming bookings, completed services and reviews.">
+  <link rel="icon" href="assets/icons/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body data-protected>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div id="site-header"></div>
+
+  <main id="main" class="container section">
+    <div class="dash-head">
+      <div>
+        <h1>Hello, <span id="welcome-name">there</span></h1>
+        <p>Track your bookings and reviews in one place.</p>
+      </div>
+      <div class="btn-group">
+        <a class="btn btn-primary" href="services.html">Find a professional</a>
+        <a class="btn btn-outline" href="profile.html">Edit profile</a>
+      </div>
+    </div>
+
+    <div class="stat-grid dash-section">
+      <div class="card stat-card"><div class="stat-value" id="stat-open">–</div><div class="stat-label">Open bookings</div></div>
+      <div class="card stat-card"><div class="stat-value" id="stat-completed">–</div><div class="stat-label">Completed services</div></div>
+      <div class="card stat-card"><div class="stat-value" id="stat-review">–</div><div class="stat-label">Ready to rate</div></div>
+      <div class="card stat-card"><div class="stat-value" id="stat-total">–</div><div class="stat-label">All bookings</div></div>
+    </div>
+
+    <section class="dash-section" aria-labelledby="recent-title">
+      <div class="dash-section-head">
+        <h2 id="recent-title">Recent bookings</h2>
+        <a href="my-bookings.html">View all bookings</a>
+      </div>
+      <div id="recent-bookings" class="booking-list" aria-live="polite"></div>
+    </section>
+
+    <section class="dash-section" aria-labelledby="reviews-title">
+      <div class="dash-section-head">
+        <h2 id="reviews-title">Your reviews</h2>
+      </div>
+      <div id="my-reviews" class="grid-cards-compact" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <dialog id="detail-dialog" class="dialog" aria-labelledby="detail-title">
+    <div class="dialog-inner">
+      <div class="dialog-head">
+        <h2 id="detail-title">Booking details</h2>
+        <form method="dialog"><button type="submit" class="icon-btn" aria-label="Close">&times;</button></form>
+      </div>
+      <div id="detail-body"></div>
+    </div>
+  </dialog>
+
+  <dialog id="review-dialog" class="dialog" aria-labelledby="review-title">
+    <form id="review-form" class="dialog-inner" novalidate>
+      <div class="dialog-head">
+        <h2 id="review-title">Rate your experience</h2>
+        <button type="button" class="icon-btn" data-close-dialog aria-label="Close">&times;</button>
+      </div>
+      <p id="review-service" class="muted"></p>
+      <fieldset>
+        <legend>Your rating</legend>
+        <div class="rating-options">
+          <input type="radio" id="rate-1" name="rating" value="1"><label for="rate-1">1 ★</label>
+          <input type="radio" id="rate-2" name="rating" value="2"><label for="rate-2">2 ★</label>
+          <input type="radio" id="rate-3" name="rating" value="3"><label for="rate-3">3 ★</label>
+          <input type="radio" id="rate-4" name="rating" value="4"><label for="rate-4">4 ★</label>
+          <input type="radio" id="rate-5" name="rating" value="5"><label for="rate-5">5 ★</label>
+        </div>
+      </fieldset>
+      <div class="form-group">
+        <label for="review-comment">Comment (optional)</label>
+        <textarea class="textarea" id="review-comment" name="comment" maxlength="1000"></textarea>
+      </div>
+      <div id="review-alert"></div>
+      <div class="btn-group">
+        <button type="submit" class="btn btn-primary">Submit review</button>
+        <button type="button" class="btn btn-outline" data-close-dialog>Cancel</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="site-footer"></div>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/customer-dashboard.js"></script>
+</body>
+</html>

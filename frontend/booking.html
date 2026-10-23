@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book a professional · WorkSure</title>
+  <meta name="description" content="Send a booking request to a verified professional.">
+  <link rel="icon" href="assets/icons/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body data-protected>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div id="site-header"></div>
+
+  <main id="main" class="container section">
+    <div class="booking-layout">
+      <section class="card" id="booking-summary" aria-live="polite"></section>
+
+      <section class="card" aria-labelledby="booking-form-title">
+        <h2 id="booking-form-title">Your booking request</h2>
+        <div id="form-alert" aria-live="polite"></div>
+
+        <form id="booking-form" novalidate>
+          <div class="form-group">
+            <label for="serviceId">Service</label>
+            <select class="select" id="serviceId" name="serviceId"></select>
+            <p class="field-error" data-error="serviceId"></p>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bookingDate">Date</label>
+              <input class="input" id="bookingDate" name="bookingDate" type="date" required>
+              <p class="field-error" data-error="bookingDate"></p>
+            </div>
+            <div class="form-group">
+              <label for="startTime">Start time</label>
+              <select class="select" id="startTime" name="startTime"></select>
+              <p class="field-error" data-error="startTime"></p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Service address</label>
+            <textarea class="textarea" id="address" name="address" rows="3" placeholder="Flat or house number, building, street, area, city" required></textarea>
+            <p class="field-error" data-error="address"></p>
+          </div>
+
+          <div class="form-group">
+            <label for="description">What needs to be done? (optional)</label>
+            <textarea class="textarea" id="description" name="description" rows="4" maxlength="1000" placeholder="For example: the kitchen tap drips every few seconds."></textarea>
+            <p class="field-error" data-error="description"></p>
+          </div>
+
+          <p class="hint">WorkSure does not process payments. Agree on payment with your professional.</p>
+          <button type="submit" class="btn btn-primary btn-block">Send booking request</button>
+        </form>
+      </section>
+
+      <aside class="card" aria-label="Price and working hours">
+        <div id="price-box"></div>
+        <div id="hours-note" class="mt-4"></div>
+      </aside>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/booking.js"></script>
+</body>
+</html>

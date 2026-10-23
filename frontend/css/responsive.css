@@ -1,0 +1,54 @@
+/* ==========================================================
+   Responsive layout. Phones first (defaults), then bigger screens.
+   Breakpoints: 600px (tablet), 900px (desktop navigation), 1100px (wide).
+   ========================================================== */
+
+/* ---------- phone defaults ---------- */
+.form-row { display: grid; gap: var(--space-4); grid-template-columns: 1fr; }
+.grid-categories { display: grid; gap: var(--space-4); grid-template-columns: 1fr; }
+.steps-grid, .benefits-grid { display: grid; gap: var(--space-5); grid-template-columns: 1fr; }
+.footer-grid { display: grid; gap: var(--space-6); grid-template-columns: 1fr; }
+.hero .btn-group .btn { flex: 1 1 100%; }
+
+/* ---------- tablet: 600px and up ---------- */
+@media (min-width: 600px) {
+  .grid-cards { grid-template-columns: repeat(2, 1fr); }
+  .grid-categories { grid-template-columns: repeat(2, 1fr); }
+  .stat-grid { grid-template-columns: repeat(4, 1fr); }
+  .form-row { grid-template-columns: 1fr 1fr; }
+  .search-card { grid-template-columns: 1fr 1fr; }
+  .hero .btn-group .btn { flex: 0 0 auto; }
+}
+
+/* ---------- desktop: 900px and up ---------- */
+@media (min-width: 900px) {
+  .nav-toggle { display: none; }
+  .nav-wrap { gap: var(--space-5); }
+  .main-nav, .main-nav.is-open {
+    display: flex;
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-4);
+    margin-left: auto;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    background: none;
+  }
+  .nav-links { flex-direction: row; gap: 2px; }
+  .nav-links a { padding: 8px 12px; }
+  .nav-actions { flex-direction: row; align-items: center; gap: 8px; }
+  .steps-grid { grid-template-columns: repeat(3, 1fr); }
+  .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+  .grid-cards { grid-template-columns: repeat(3, 1fr); }
+  .footer-grid { grid-template-columns: 2fr 1fr 1fr 1.4fr; }
+  .section { padding: var(--space-8) 0; }
+}
+
+/* ---------- wide: 1100px and up ---------- */
+@media (min-width: 1100px) {
+  .grid-categories { grid-template-columns: repeat(4, 1fr); }
+  .search-card { grid-template-columns: repeat(4, 1fr) auto; align-items: end; }
+  .search-card .btn { align-self: end; }
+}

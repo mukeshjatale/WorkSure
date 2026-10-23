@@ -1,0 +1,24 @@
+/* Login and registration pages */
+.auth-page { padding: var(--space-6) 0 var(--space-7); }
+.auth-layout { display: grid; gap: var(--space-5); align-items: start; }
+.auth-card { width: 100%; max-width: 560px; margin-inline: auto; }
+.auth-card h1 { font-size: 1.6rem; margin-bottom: var(--space-2); }
+.auth-card > p.muted { margin-bottom: var(--space-5); }
+.auth-foot { margin: var(--space-4) 0 0; text-align: center; color: var(--color-muted); }
+.auth-aside { display: none; background: linear-gradient(135deg, #0E7490, #155E75); color: #FFFFFF; padding: var(--space-6); border-radius: var(--radius-lg); }
+.auth-aside h2 { color: #FFFFFF; font-size: 1.4rem; }
+.auth-aside p { color: #E0F2FE; }
+.auth-aside .check-list i { color: #4ADE80; }
+.role-options { display: grid; gap: var(--space-3); grid-template-columns: 1fr 1fr; }
+.role-option { position: relative; }
+.role-option input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.role-option label { display: grid; gap: 4px; min-height: 84px; padding: var(--space-3) var(--space-4); border: 2px solid var(--color-border); border-radius: var(--radius-md); background: #FFFFFF; cursor: pointer; font-weight: 600; }
+.role-option label small { font-weight: 400; color: var(--color-muted); font-size: 0.85rem; }
+.role-option label i { color: var(--color-primary); font-size: 1.2rem; }
+.role-option input:checked + label { border-color: var(--color-primary); background: var(--color-primary-soft); }
+.role-option input:focus-visible + label { box-shadow: var(--focus-ring); }
+@media (min-width: 900px) {
+  .auth-layout { grid-template-columns: 1fr 1fr; }
+  .auth-layout.auth-layout-single { grid-template-columns: 1fr; }
+  .auth-aside { display: block; }
+}

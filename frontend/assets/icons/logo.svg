@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="WorkSure logo">
+  <rect width="64" height="64" rx="14" fill="#0E7490"/>
+  <path d="M20 14l6 6-4 4-6-6zM31 24l9-9a10 10 0 0 1 12 12l-9 9-12-12z" fill="#FFFFFF" opacity="0.95"/>
+  <path d="M22 36l10 10-6 6-10-10z" fill="#F59E0B"/>
+  <circle cx="46" cy="46" r="5" fill="#F59E0B"/>
+</svg>

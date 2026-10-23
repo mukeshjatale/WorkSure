@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create an account · WorkSure</title>
+  <meta name="description" content="Create a WorkSure customer or professional account.">
+  <link rel="icon" href="assets/icons/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div id="site-header"></div>
+
+  <main id="main" class="auth-page">
+    <div class="container auth-layout auth-layout-single">
+      <section class="card auth-card" aria-labelledby="register-title">
+        <h1 id="register-title">Create your account</h1>
+        <p class="muted">Choose the account type that fits you. Administrator accounts cannot be created here.</p>
+
+        <div id="form-alert" aria-live="polite"></div>
+
+        <form id="register-form" novalidate>
+          <fieldset>
+            <legend>I want to</legend>
+            <div class="role-options">
+              <div class="role-option">
+                <input type="radio" id="role-customer" name="role" value="customer" checked>
+                <label for="role-customer"><i class="fa-solid fa-house-user" aria-hidden="true"></i> Book services
+                  <small>Hire professionals for my home</small></label>
+              </div>
+              <div class="role-option">
+                <input type="radio" id="role-worker" name="role" value="worker">
+                <label for="role-worker"><i class="fa-solid fa-helmet-safety" aria-hidden="true"></i> Offer services
+                  <small>Work as a home professional</small></label>
+              </div>
+            </div>
+            <p class="field-error" data-error="role"></p>
+          </fieldset>
+
+          <div class="form-group">
+            <label for="fullName">Full name</label>
+            <input class="input" id="fullName" name="fullName" autocomplete="name" required>
+            <p class="field-error" data-error="fullName"></p>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input class="input" id="email" name="email" type="email" autocomplete="email" required>
+              <p class="field-error" data-error="email"></p>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone number</label>
+              <input class="input" id="phone" name="phone" type="tel" autocomplete="tel" required>
+              <p class="field-error" data-error="phone"></p>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="password">Password</label>
+              <div class="input-pw">
+                <input class="input" id="password" name="password" type="password" autocomplete="new-password" required aria-describedby="password-hint">
+                <button type="button" class="pw-toggle" data-toggle-password data-target="password" aria-label="Show password">
+                  <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                </button>
+              </div>
+              <p id="password-hint" class="hint">At least 8 characters, with letters and numbers.</p>
+              <p class="field-error" data-error="password"></p>
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">Confirm password</label>
+              <div class="input-pw">
+                <input class="input" id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" required>
+                <button type="button" class="pw-toggle" data-toggle-password data-target="confirmPassword" aria-label="Show password">
+                  <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                </button>
+              </div>
+              <p class="field-error" data-error="confirmPassword"></p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox-row">
+              <input type="checkbox" id="acceptTerms" name="acceptTerms">
+              <label for="acceptTerms">I agree to the terms of use and the privacy notice.</label>
+            </div>
+            <p class="field-error" data-error="acceptTerms"></p>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">Create account</button>
+        </form>
+
+        <p class="auth-foot">Already have an account? <a href="login.html">Log in</a></p>
+      </section>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

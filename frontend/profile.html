@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your account · WorkSure</title>
+  <meta name="description" content="Update your name, phone number and password.">
+  <link rel="icon" href="assets/icons/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body data-protected>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div id="site-header"></div>
+
+  <main id="main" class="container section">
+    <div class="dash-head">
+      <div>
+        <h1>Your account</h1>
+        <p>Keep your contact details up to date and protect your password.</p>
+      </div>
+      <span class="badge badge-pending" id="account-role"></span>
+    </div>
+
+    <div class="two-col">
+      <section class="card" aria-labelledby="details-title">
+        <h2 id="details-title">Personal details</h2>
+        <div id="account-alert"></div>
+        <form id="account-form" novalidate>
+          <div class="form-group">
+            <label for="fullName">Full name</label>
+            <input class="input" id="fullName" name="fullName" autocomplete="name" required>
+            <p class="field-error" data-error="fullName"></p>
+          </div>
+          <div class="form-group">
+            <label for="email">Email address (cannot be changed here)</label>
+            <input class="input" id="email" name="email" type="email" disabled>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone number</label>
+            <input class="input" id="phone" name="phone" type="tel" autocomplete="tel" required>
+            <p class="field-error" data-error="phone"></p>
+          </div>
+          <button type="submit" class="btn btn-primary">Save details</button>
+        </form>
+        <div id="role-links" class="mt-5"></div>
+      </section>
+
+      <section class="card" aria-labelledby="password-title">
+        <h2 id="password-title">Change password</h2>
+        <div id="password-alert"></div>
+        <form id="password-form" novalidate>
+          <div class="form-group">
+            <label for="currentPassword">Current password</label>
+            <input class="input" id="currentPassword" name="currentPassword" type="password" autocomplete="current-password" required>
+            <p class="field-error" data-error="currentPassword"></p>
+          </div>
+          <div class="form-group">
+            <label for="newPassword">New password</label>
+            <input class="input" id="newPassword" name="newPassword" type="password" autocomplete="new-password" required aria-describedby="new-password-hint">
+            <p id="new-password-hint" class="hint">At least 8 characters, with letters and numbers.</p>
+            <p class="field-error" data-error="newPassword"></p>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm new password</label>
+            <input class="input" id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" required>
+            <p class="field-error" data-error="confirmPassword"></p>
+          </div>
+          <button type="submit" class="btn btn-outline">Change password</button>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>
